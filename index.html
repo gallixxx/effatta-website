@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>Effatta — la facciamo facile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/effatta-mark-blue.svg">
+  <link rel="stylesheet" href="assets/colors_and_type.css">
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface-0);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+    body { line-height: 1.5; }
+    * { box-sizing: border-box; }
+    button { font-family: inherit; }
+    a { color: inherit; }
+
+    /* Subtle universal hover on buttons / anchors. Keeps the
+       JSX free of repeated onMouseEnter/Leave. */
+    button, a { transition: filter var(--t-base) var(--ease-out); }
+    button:hover, a:hover { filter: brightness(0.97); }
+    button:active, a:active { transform: scale(0.985); }
+    section { position: relative; }
+
+    /* Smooth fade for section reveals */
+    .reveal { opacity: 0; transform: translateY(12px);
+              transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Focus ring */
+    :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Components (load order: leaf → root) -->
+  <script type="text/babel" src="components/Icon.jsx"></script>
+  <script type="text/babel" src="components/atoms.jsx"></script>
+  <script type="text/babel" src="components/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="components/NavBar.jsx"></script>
+  <script type="text/babel" src="components/Hero.jsx"></script>
+  <script type="text/babel" src="components/AudienceSplit.jsx"></script>
+  <script type="text/babel" src="components/FeatureGrid.jsx"></script>
+  <script type="text/babel" src="components/StatsBand.jsx"></script>
+  <script type="text/babel" src="components/PricingTeaser.jsx"></script>
+  <script type="text/babel" src="components/ApiSample.jsx"></script>
+  <script type="text/babel" src="components/PartnerSection.jsx"></script>
+  <script type="text/babel" src="components/FAQ.jsx"></script>
+  <script type="text/babel" src="components/Footer.jsx"></script>
+
+  <script type="text/babel">
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "heroHeadline": "Fatture e scontrini, senza pensieri.",
+      "heroSubtitle": "Effatta è la piattaforma fiscale italiana per partite IVA, software house e commercialisti. Emette, trasmette allo SDI, conserva a norma.",
+      "heroVariant": "C",
+      "colorRegister": "Chiaro",
+      "density": "Spaziosa",
+      "audience": "Esercenti",
+      "audienceTreatment": "Cards",
+      "showStats": true,
+      "showAudienceSplit": true,
+      "showFeatures": true,
+      "showPricing": true,
+      "showApi": true,
+      "showPartner": true,
+      "showFAQ": true
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      const audience = t.audience === "Partner" ? "partner" : "merchant";
+      const density = t.density === "Compatta" ? "compact" : "spacious";
+      const heroVariant = t.heroVariant; // "A" | "B" | "C"
+      const colorRegister = t.colorRegister === "Ink" ? "ink" : "light";
+      const audienceTreatment = t.audienceTreatment === "Tabs" ? "tabs" : "cards";
+
+      const setAudience = (k) => setTweak("audience", k === "partner" ? "Partner" : "Esercenti");
+
+      // Light section reveal on scroll
+      React.useEffect(() => {
+        const els = document.querySelectorAll(".reveal");
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); });
+        }, { threshold: 0.08 });
+        els.forEach((el) => io.observe(el));
+        return () => io.disconnect();
+      }, [heroVariant, audienceTreatment, audience, density, colorRegister,
+          t.showStats, t.showAudienceSplit, t.showFeatures,
+          t.showPricing, t.showApi, t.showPartner, t.showFAQ]);
+
+      return (
+        <div>
+          <NavBar audience={audience} setAudience={setAudience} colorRegister={colorRegister} />
+          <Hero
+            variant={heroVariant}
+            headline={t.heroHeadline}
+            subtitle={t.heroSubtitle}
+            audience={audience}
+            setAudience={setAudience}
+            density={density}
+          />
+
+          {t.showAudienceSplit && (
+            <div className="reveal">
+              <AudienceSplit
+                audience={audience}
+                setAudience={setAudience}
+                treatment={audienceTreatment}
+                density={density}
+              />
+            </div>
+          )}
+
+          {t.showFeatures && (
+            <div id="prodotto" className="reveal">
+              <FeatureGrid audience={audience} density={density} />
+            </div>
+          )}
+
+          {t.showStats && (
+            <div className="reveal">
+              <StatsBand density={density} />
+            </div>
+          )}
+
+          {t.showPricing && (
+            <div className="reveal">
+              <PricingTeaser density={density} />
+            </div>
+          )}
+
+          {t.showApi && (
+            <div className="reveal">
+              <ApiSample density={density} />
+            </div>
+          )}
+
+          {t.showPartner && (
+            <div className="reveal">
+              <PartnerSection density={density} />
+            </div>
+          )}
+
+          {t.showFAQ && (
+            <div id="faq" className="reveal">
+              <FAQ density={density} />
+            </div>
+          )}
+
+          <Footer />
+
+          <TweaksPanel>
+            <TweakSection label="Hero" />
+            <TweakRadio label="Variante" value={t.heroVariant}
+                        options={["A", "B", "C"]}
+                        onChange={(v) => setTweak("heroVariant", v)} />
+            <TweakText label="Titolo" value={t.heroHeadline}
+                       onChange={(v) => setTweak("heroHeadline", v)} />
+            <TweakText label="Sottotitolo" value={t.heroSubtitle}
+                       onChange={(v) => setTweak("heroSubtitle", v)} />
+
+            <TweakSection label="Tono e visual" />
+            <TweakRadio label="Audience attiva" value={t.audience}
+                        options={["Esercenti", "Partner"]}
+                        onChange={(v) => setTweak("audience", v)} />
+            <TweakRadio label="Color register" value={t.colorRegister}
+                        options={["Chiaro", "Ink"]}
+                        onChange={(v) => setTweak("colorRegister", v)} />
+            <TweakRadio label="Densità" value={t.density}
+                        options={["Compatta", "Spaziosa"]}
+                        onChange={(v) => setTweak("density", v)} />
+            <TweakRadio label="Audience split" value={t.audienceTreatment}
+                        options={["Cards", "Tabs"]}
+                        onChange={(v) => setTweak("audienceTreatment", v)} />
+
+            <TweakSection label="Sezioni visibili" />
+            <TweakToggle label="Audience split" value={t.showAudienceSplit}
+                         onChange={(v) => setTweak("showAudienceSplit", v)} />
+            <TweakToggle label="Feature grid" value={t.showFeatures}
+                         onChange={(v) => setTweak("showFeatures", v)} />
+            <TweakToggle label="Numeri" value={t.showStats}
+                         onChange={(v) => setTweak("showStats", v)} />
+            <TweakToggle label="Prezzi" value={t.showPricing}
+                         onChange={(v) => setTweak("showPricing", v)} />
+            <TweakToggle label="API sample" value={t.showApi}
+                         onChange={(v) => setTweak("showApi", v)} />
+            <TweakToggle label="Partner" value={t.showPartner}
+                         onChange={(v) => setTweak("showPartner", v)} />
+            <TweakToggle label="FAQ" value={t.showFAQ}
+                         onChange={(v) => setTweak("showFAQ", v)} />
+          </TweaksPanel>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

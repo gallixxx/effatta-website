@@ -1,0 +1,367 @@
+/* ============================================================
+   Effatta — Foundations
+   colors_and_type.css
+
+   Source of truth for the Effatta design system.
+   Anchors every other file (preview cards, UI kits, slides).
+
+   Visual DNA, in one breath:
+   - A bright, civic blue lifted from the logo (#2F80ED).
+   - Plus Jakarta Sans across the entire system, in a tight
+     weight ladder from 400 → 800.
+   - Generous whitespace, pill geometry echoing the wordmark,
+     warm ink for body, paper-tinted neutrals for surfaces.
+
+   Two audiences, one palette: the brand blue is loud for the
+   "esercente" (direct merchant) track. For the "partner" track
+   (software houses, associations, commercialisti) we lean on
+   ink + paper + a single accent moment of blue — premium and
+   technical without changing the system.
+   ============================================================ */
+
+/* ---------- 1. Web fonts ---------- */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-ExtraLight.ttf") format("truetype");
+  font-weight: 200; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Light.ttf") format("truetype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Italic.ttf") format("truetype");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Medium.ttf") format("truetype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Bold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800; font-style: italic; font-display: swap;
+}
+
+:root {
+  /* ============================================================
+     2. Color tokens
+     ============================================================ */
+
+  /* -- Brand blue (lifted directly from logo) -- */
+  --eff-blue-50:  #EEF4FE;
+  --eff-blue-100: #DCE8FD;
+  --eff-blue-200: #BAD4F9;  /* logo light bar — accent */
+  --eff-blue-300: #93BBF5;
+  --eff-blue-400: #62A0F1;
+  --eff-blue-500: #2F80ED;  /* PRIMARY — logo blue */
+  --eff-blue-600: #1E66CD;
+  --eff-blue-700: #1750A3;
+  --eff-blue-800: #143F7E;
+  --eff-blue-900: #0F2C57;
+
+  /* -- Ink (neutral, very slight blue cast — keeps it on-brand) -- */
+  --eff-ink-50:  #F6F7F9;
+  --eff-ink-100: #ECEEF2;
+  --eff-ink-200: #D9DDE5;
+  --eff-ink-300: #B9BFCC;
+  --eff-ink-400: #8A93A4;
+  --eff-ink-500: #5F687A;
+  --eff-ink-600: #424B5C;
+  --eff-ink-700: #2C3340;
+  --eff-ink-800: #1B2030;
+  --eff-ink-900: #0E1320;
+  --eff-ink-950: #060912;
+
+  /* -- Paper (warm cream — surfaces, partner side) -- */
+  --eff-paper-50:  #FBFAF7;  /* primary off-white surface */
+  --eff-paper-100: #F4F1EA;
+  --eff-paper-200: #E9E4D6;
+
+  /* -- Semantic accents (for receipts, invoice status, etc.) -- */
+  --eff-success-50:  #ECFAF1;
+  --eff-success-500: #16A06A;   /* "trasmesso" / paid */
+  --eff-success-700: #0E6E48;
+
+  --eff-warning-50:  #FFF6E5;
+  --eff-warning-500: #E89A1B;   /* "in elaborazione" */
+  --eff-warning-700: #9B6708;
+
+  --eff-danger-50:  #FDECEC;
+  --eff-danger-500: #D8362C;    /* "scartato" / SDI rejection */
+  --eff-danger-700: #8E1F18;
+
+  /* ------------------------------------------------------------
+     3. Semantic color tokens (use these in components, not raw)
+     ------------------------------------------------------------ */
+
+  /* Surfaces */
+  --surface-0:        #FFFFFF;         /* page base */
+  --surface-1:        var(--eff-paper-50);  /* card on page */
+  --surface-2:        var(--eff-ink-50);    /* recessed wells, code blocks */
+  --surface-inverse:  var(--eff-ink-900);   /* dark sections */
+  --surface-brand:    var(--eff-blue-500);  /* hero / CTA backgrounds */
+  --surface-brand-soft: var(--eff-blue-50); /* tints, badges */
+
+  /* Foreground (text + icon) */
+  --fg-1: var(--eff-ink-900);   /* primary text */
+  --fg-2: var(--eff-ink-700);   /* body */
+  --fg-3: var(--eff-ink-500);   /* secondary / metadata */
+  --fg-4: var(--eff-ink-400);   /* placeholder / disabled label */
+  --fg-on-brand:    #FFFFFF;
+  --fg-on-inverse:  #FFFFFF;
+  --fg-brand:       var(--eff-blue-500);
+  --fg-brand-strong: var(--eff-blue-700);
+
+  /* Borders */
+  --border-1: var(--eff-ink-200);   /* default hairline */
+  --border-2: var(--eff-ink-300);   /* emphasized */
+  --border-strong: var(--eff-ink-900);
+  --border-brand: var(--eff-blue-500);
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(47, 128, 237, 0.35);
+
+  /* ============================================================
+     4. Type system
+     ============================================================ */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui,
+               -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono",
+               "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* Weights */
+  --w-extralight: 200;
+  --w-light:      300;
+  --w-regular:    400;
+  --w-medium:     500;
+  --w-semibold:   600;
+  --w-bold:       700;
+  --w-extrabold:  800;
+
+  /* Type scale (modular, ~1.2). Mobile-first; desktop bumps via
+     fluid clamp where needed. */
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-30: 1.875rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-60: 3.75rem;
+  --fs-72: 4.5rem;
+
+  /* Line-heights */
+  --lh-tight: 1.05;
+  --lh-snug:  1.18;
+  --lh-base:  1.5;
+  --lh-loose: 1.7;
+
+  /* Letter-spacing — Jakarta is geometric, tighten the display sizes,
+     loosen the smallest UI labels */
+  --ls-display: -0.025em;
+  --ls-heading: -0.015em;
+  --ls-body:    -0.005em;
+  --ls-label:   0.06em;     /* SMALL CAPS-STYLE LABELS */
+
+  /* ============================================================
+     5. Spacing — 4px grid
+     ============================================================ */
+  --sp-0:  0;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+  --sp-32: 128px;
+
+  /* ============================================================
+     6. Radii — capsule-leaning to echo the logo's rounded bars
+     ============================================================ */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --r-2xl:  32px;
+  --r-pill: 999px;   /* default for buttons, chips, tags */
+
+  /* ============================================================
+     7. Shadows — soft, low-spread. Trust, not theatrics.
+     ============================================================ */
+  --shadow-xs: 0 1px 0 0 rgba(14, 19, 32, 0.04);
+  --shadow-sm: 0 1px 2px rgba(14, 19, 32, 0.05),
+               0 1px 1px rgba(14, 19, 32, 0.04);
+  --shadow-md: 0 6px 16px -6px rgba(14, 19, 32, 0.10),
+               0 2px 4px -2px rgba(14, 19, 32, 0.06);
+  --shadow-lg: 0 18px 40px -20px rgba(14, 19, 32, 0.20),
+               0 4px 10px -4px rgba(14, 19, 32, 0.06);
+  --shadow-xl: 0 40px 80px -30px rgba(14, 19, 32, 0.28),
+               0 8px 20px -8px rgba(14, 19, 32, 0.10);
+  --shadow-brand: 0 18px 40px -18px rgba(47, 128, 237, 0.45);
+
+  /* Inner — for inputs, recessed wells */
+  --shadow-inset: inset 0 1px 0 rgba(14, 19, 32, 0.04);
+
+  /* ============================================================
+     8. Motion
+     ============================================================ */
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);  /* default */
+  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --t-fast:    120ms;
+  --t-base:    200ms;
+  --t-slow:    320ms;
+  --t-slowest: 520ms;
+}
+
+/* ============================================================
+   9. Semantic element styles
+   ============================================================ */
+.eff-root,
+.eff-body {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  color: var(--fg-1);
+  font-size: var(--fs-16);
+  line-height: var(--lh-base);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display (hero) */
+.eff-display {
+  font-family: var(--font-sans);
+  font-weight: var(--w-extrabold);
+  font-size: clamp(2.5rem, 6vw, var(--fs-72));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+  color: var(--fg-1);
+}
+
+/* Headings */
+.eff-h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-bold);
+  font-size: clamp(2rem, 4.5vw, var(--fs-48));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.eff-h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-bold);
+  font-size: clamp(1.5rem, 3vw, var(--fs-36));
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.eff-h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  color: var(--fg-1);
+}
+.eff-h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-20);
+  line-height: 1.3;
+  color: var(--fg-1);
+}
+
+/* Body */
+.eff-lede {
+  font-size: var(--fs-20);
+  line-height: 1.45;
+  font-weight: var(--w-regular);
+  color: var(--fg-2);
+}
+.eff-p {
+  font-size: var(--fs-16);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+}
+.eff-small {
+  font-size: var(--fs-14);
+  line-height: 1.45;
+  color: var(--fg-3);
+}
+
+/* Eyebrows / labels — uppercase, tracked */
+.eff-eyebrow {
+  font-size: var(--fs-12);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-brand);
+}
+
+/* Mono — for API endpoints, code, fiscal codes */
+.eff-mono,
+.eff-code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  letter-spacing: 0;
+}
+.eff-code {
+  background: var(--surface-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-sm);
+  padding: 1px 6px;
+  color: var(--fg-1);
+}
