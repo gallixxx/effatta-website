@@ -50,10 +50,9 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
         
         <a href="index.html" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <img
-            src={isInk ? "assets/logos/effatta-lockup-on-black.svg" : "assets/logos/effatta-lockup-blue.svg"}
+            src="assets/logos/effatta-mark-blue.svg"
             alt="effatta."
-            style={{ display: "block", objectFit: "cover", height: "60px", width: "26px" }} />
-          
+            style={{ display: "block", height: "32px", width: "32px" }} />
         </a>
 
         <nav className="nav-links" style={{ display: "flex", gap: 24, marginLeft: 8 }}>
@@ -132,7 +131,9 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
         </div>
 
         <a
-          href="#login"
+          href="https://fattura.effatta.it/Account/Login"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             fontFamily: "var(--font-sans)",
             fontWeight: 600,

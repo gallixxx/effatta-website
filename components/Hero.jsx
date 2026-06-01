@@ -261,13 +261,14 @@ function HeroC({ headline, subtitle, pad, audience, setAudience }) {
             {headline}
           </h1>
           <p style={{
-
-            maxWidth: 600,
+            maxWidth: 700,
+            width: "700px",
             fontFamily: "var(--font-sans)",
             fontSize: 19,
             lineHeight: 1.5,
             color: "var(--fg-2)",
-            textWrap: "pretty", margin: "24px 110px 0px", width: "600px"
+            textWrap: "pretty",
+            margin: "24px 60px 0px"
           }}>
             {subtitle}
           </p>
@@ -619,7 +620,7 @@ function SdiStrip() {
   { label: "Firma", done: true },
   { label: "Trasmetti allo SDI", done: true },
   { label: "Ricevi esito", done: true },
-  { label: "Conserva 10 anni", done: false }];
+  { label: "Conserva 10 anni", done: true }];
 
   return (
     <div style={{
@@ -647,13 +648,13 @@ function SdiStrip() {
       {steps.map((s, i) =>
       <React.Fragment key={s.label}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ ...{
+            <span style={{
               width: 18, height: 18, borderRadius: 999,
               background: s.done ? "var(--eff-success-500)" : "#fff",
               border: s.done ? "none" : "1.5px solid var(--border-2)",
               display: "inline-flex", alignItems: "center", justifyContent: "center",
               color: "#fff"
-            }, backgroundImage: "initial", backgroundPosition: "initial", backgroundSize: "initial", backgroundRepeat: "initial", backgroundAttachment: "initial", backgroundOrigin: "initial", backgroundClip: "initial", background: "rgb(39, 175, 37)" }}>
+            }}>
               {s.done && <Icon name="check" size={11} strokeWidth={3} />}
             </span>
             <span style={{
