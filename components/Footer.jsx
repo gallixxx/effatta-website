@@ -5,7 +5,8 @@ const FOOTER_COLS = [
   links: [
   { label: "Fatturazione elettronica", href: "fatturazione.html" },
   { label: "Scontrino digitale", href: "scontrino.html" },
-  { label: "Prezzi", href: "pricing.html" }]
+  { label: "Prezzi", href: "pricing.html" },
+  { label: "App Mobile", href: "app-mobile.html" }]
 
 },
 {
@@ -14,14 +15,12 @@ const FOOTER_COLS = [
   { label: "Software house", href: "software-house.html" },
   { label: "Commercialisti", href: "partner.html#commercialisti" },
   { label: "Associazioni", href: "partner.html#associazioni" },
-  { label: "White-label", href: "partner.html" },
   { label: "Diventa partner", href: "partner.html" }]
 
 },
 {
   title: "Sviluppatori",
   links: [
-  { label: "Documentazione", href: "api.html" },
   { label: "API fatturazione", href: "api.html#invoices" },
   { label: "API scontrino", href: "api.html#receipts" },
   { label: "Sandbox", href: "api.html#auth" },
@@ -33,7 +32,6 @@ const FOOTER_COLS = [
   links: [
   { label: "Blog", href: "blog.html" },
   { label: "Manuale utente", href: "assistenza.html" },
-  { label: "FAQ", href: "index.html#faq" },
   { label: "Assistenza", href: "assistenza.html" },
   { label: "Contatti", href: "contatti.html" }]
 
@@ -58,7 +56,7 @@ function Footer() {
             <img
               src="assets/logos/effatta-lockup-tagline-on-black.svg"
               alt="effatta. la facciamo facile"
-              style={{ display: "block", marginLeft: -6, height: "56px", width: "57px" }} />
+              style={{ display: "block", marginLeft: -6, height: "96px", width: "97px" }} />
             
             <p style={{
               margin: "16px 0 24px",
