@@ -5,8 +5,6 @@ const FOOTER_COLS = [
   links: [
   { label: "Fatturazione elettronica", href: "fatturazione.html" },
   { label: "Scontrino digitale", href: "scontrino.html" },
-  { label: "Cassa web e app mobile", href: "scontrino.html" },
-  { label: "Conservazione a norma", href: "fatturazione.html" },
   { label: "Prezzi", href: "pricing.html" }]
 
 },
@@ -46,8 +44,7 @@ const FOOTER_COLS = [
   { label: "Chi siamo", href: "#" },
   { label: "Lavora con noi", href: "#" },
   { label: "Termini di servizio", href: "#" },
-  { label: "Privacy e cookie", href: "#" },
-  { label: "Press kit", href: "#" }]
+  { label: "Privacy e cookie", href: "#" }]
 
 }];
 
@@ -129,7 +126,7 @@ function Footer() {
           flexWrap: "wrap", gap: 16
         }}>
           <div style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(255,255,255,0.55)" }}>
-            © 2026 Effatta S.r.l. · P.IVA IT08123456789 · Sede legale: Napoli (NA), Italia
+            © 2026 Effatta S.r.l. · P.IVA IT08993761215 · Sede legale: Via G. Porzio, Isola C2 snc (Centro Direzionale) 80143 Napoli
           </div>
           <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
             {["Termini di servizio", "Privacy", "Cookie", "DPA"].map((t) =>

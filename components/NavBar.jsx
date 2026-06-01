@@ -52,7 +52,7 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
           <img
             src="assets/logos/effatta-mark-blue.svg"
             alt="effatta."
-            style={{ display: "block", height: "32px", width: "32px" }} />
+            style={{ display: "block", height: "40px", width: "40px" }} />
         </a>
 
         <nav className="nav-links" style={{ display: "flex", gap: 24, marginLeft: 8 }}>
