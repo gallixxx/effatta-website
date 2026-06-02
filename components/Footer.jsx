@@ -54,7 +54,7 @@ function Footer() {
         <div style={{ display: "grid", gridTemplateColumns: "1.4fr repeat(5, 1fr)", gap: 32, paddingBottom: 56 }}>
           <div>
             <img
-              src="assets/logos/effatta-lockup-tagline-on-black.svg"
+              src="assets/logos/effatta-logo-tagline-su-bianco.svg"
               alt="effatta. la facciamo facile"
               style={{ display: "block", marginLeft: -6, height: "96px", width: "97px" }} />
             

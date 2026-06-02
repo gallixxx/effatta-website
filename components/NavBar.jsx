@@ -50,7 +50,7 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
         
         <a href="index.html" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <img
-            src="assets/logos/effatta-mark-blue.svg"
+            src="assets/logos/effatta-icona-blu-su-bianco.svg"
             alt="effatta."
             style={{ display: "block", height: "40px", width: "40px" }} />
         </a>
