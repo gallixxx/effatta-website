@@ -41,6 +41,11 @@ const _LUCIDE_PATHS = {
   "terminal": <><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></>,
   "layers": <><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></>,
   "arrow-left": <><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></>,
+  "building-2": <><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></>,
+  "plus": <><path d="M5 12h14"/><path d="M12 5v14"/></>,
+  "minus": <path d="M5 12h14"/>,
+  "smartphone": <><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></>,
+  "monitor": <><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></>,
 };
 
 function Icon({ name, size = 18, strokeWidth = 1.6, className = "", style = {} }) {
