@@ -56,10 +56,10 @@ function Footer() {
             <img
               src="assets/logos/effatta-logo-tagline-su-bianco.svg"
               alt="effatta. la facciamo facile"
-              style={{ display: "block", marginLeft: -6, height: "96px", width: "97px" }} />
+              style={{ display: "block", height: "72px", width: "auto" }} />
             
             <p style={{
-              margin: "16px 0 24px",
+              margin: "8px 0 20px",
               fontFamily: "var(--font-sans)", fontSize: 14, lineHeight: 1.55,
               color: "rgba(255,255,255,0.6)",
               maxWidth: 280
