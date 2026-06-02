@@ -8,6 +8,13 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+  React.useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 860) setOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const isInk = colorRegister === "ink";
 
   // Active link is based on current pathname
@@ -130,33 +137,73 @@ function NavBar({ audience, setAudience, colorRegister = "light" }) {
           })}
         </div>
 
-        <a
-          href="https://fattura.effatta.it/Account/Login"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div className="nav-cta-cluster" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <a
+            href="https://fattura.effatta.it/Account/Login"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 14,
+              color: isInk ? "#fff" : "var(--fg-1)", textDecoration: "none"
+            }}>
+            Accedi
+          </a>
+          <Button size="sm" variant={isInk ? "secondary" : "blue"} trailingIcon="arrow-right" as="a" href="#signup">
+            Inizia gratis
+          </Button>
+        </div>
+
+        <button
+          className="nav-burger"
+          aria-label="Menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
           style={{
-            fontFamily: "var(--font-sans)",
-            fontWeight: 600,
-            fontSize: 14,
+            width: 40, height: 40, borderRadius: 10, cursor: "pointer",
+            alignItems: "center", justifyContent: "center", padding: 0,
+            background: "transparent",
+            border: isInk ? "1px solid rgba(255,255,255,0.18)" : "1px solid var(--border-1)",
             color: isInk ? "#fff" : "var(--fg-1)",
-            textDecoration: "none"
           }}>
-          
-          Accedi
-        </a>
-        <Button
-          size="sm"
-          variant={isInk ? "secondary" : "blue"}
-          trailingIcon="arrow-right"
-          as="a"
-          href="#signup">
-          
-          Inizia gratis
-        </Button>
+          <Icon name={open ? "x" : "menu"} size={20} />
+        </button>
       </div>
+
+      {open && (
+        <div className="nav-mobile-panel" style={{
+          borderTop: isInk ? "1px solid rgba(255,255,255,0.08)" : "1px solid var(--border-1)",
+          background: isInk ? "var(--eff-ink-900)" : "#fff",
+          padding: "8px 20px 20px",
+        }}>
+          <nav style={{ display: "flex", flexDirection: "column" }}>
+            {links.map((l) => (
+              <a key={l.label} href={l.href} onClick={() => setOpen(false)} style={{
+                fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 15,
+                color: isInk ? "rgba(255,255,255,0.9)" : "var(--fg-1)",
+                textDecoration: "none", padding: "13px 0",
+                borderBottom: isInk ? "1px solid rgba(255,255,255,0.06)" : "1px solid var(--border-1)",
+              }}>{l.label}</a>
+            ))}
+          </nav>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
+            <a href="https://fattura.effatta.it/Account/Login" target="_blank" rel="noopener noreferrer" style={{
+              fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 15,
+              color: isInk ? "#fff" : "var(--fg-1)", textDecoration: "none", padding: "4px 0",
+            }}>Accedi</a>
+            <Button variant={isInk ? "secondary" : "blue"} trailingIcon="arrow-right" as="a" href="#signup" style={{ width: "100%" }}>
+              Inizia gratis
+            </Button>
+          </div>
+        </div>
+      )}
       <style>{`
-        @media (max-width: 1180px) { .nav-aud-pivot { display: none !important; } }
-        @media (max-width: 980px)  { .nav-links { display: none !important; } }
+        .nav-burger { display: none; }
+        @media (max-width: 1100px) { .nav-aud-pivot { display: none !important; } }
+        @media (max-width: 860px) {
+          .nav-links { display: none !important; }
+          .nav-cta-cluster { display: none !important; }
+          .nav-burger { display: inline-flex !important; }
+        }
       `}</style>
     </header>);
 

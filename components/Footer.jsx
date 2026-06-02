@@ -49,10 +49,10 @@ const FOOTER_COLS = [
 
 function Footer() {
   return (
-    <footer style={{ background: "var(--eff-ink-900)", color: "#fff", paddingTop: 80, paddingBottom: 32 }}>
+    <footer className="eff-footer" style={{ background: "var(--eff-ink-900)", color: "#fff", paddingTop: 80, paddingBottom: 32 }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.4fr repeat(5, 1fr)", gap: 32, paddingBottom: 56 }}>
-          <div>
+        <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1.4fr repeat(5, 1fr)", gap: 32, paddingBottom: 56 }}>
+          <div className="footer-brand">
             <img
               src="assets/logos/effatta-logo-tagline-su-bianco.svg"
               alt="effatta. la facciamo facile"
@@ -134,6 +134,17 @@ function Footer() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 920px) {
+          .footer-grid { grid-template-columns: 1fr 1fr 1fr !important; row-gap: 40px !important; }
+          .footer-brand { grid-column: 1 / -1 !important; }
+        }
+        @media (max-width: 560px) {
+          .eff-footer { padding-top: 56px !important; }
+          .eff-footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+        }
+      `}</style>
     </footer>);
 
 }

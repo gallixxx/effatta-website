@@ -72,9 +72,11 @@ function Button({
     ...buttonVariants[variant],
     ...(style || {}),
   };
-  const props = Tag === "a" ? { href: href || "#", ...rest } : rest;
+  const { className, ...others } = rest;
+  const cls = ["eff-btn", className].filter(Boolean).join(" ");
+  const props = Tag === "a" ? { href: href || "#", ...others } : others;
   return (
-    <Tag style={composed} {...props}>
+    <Tag className={cls} style={composed} {...props}>
       {icon ? <Icon name={icon} size={16} /> : null}
       {children}
       {trailingIcon ? <Icon name={trailingIcon} size={16} /> : null}

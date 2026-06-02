@@ -16,25 +16,38 @@ const FATT_CSS = `
   .ff-card { transition: transform var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out); }
   .ff-card:hover { border-color: var(--border-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
   @keyframes ffFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* Tablet */
   @media (max-width: 920px) {
-    .ff-split { grid-template-columns: 1fr !important; gap: 48px !important; }
-    .ff-grid3 { grid-template-columns: 1fr !important; }
+    .ff-split { grid-template-columns: 1fr !important; gap: 44px !important; }
+    .ff-grid3 { grid-template-columns: 1fr 1fr !important; }
     .ff-grid4 { grid-template-columns: 1fr 1fr !important; }
-    .ff-flow { grid-template-columns: 1fr 1fr !important; row-gap: 36px !important; }
+    .ff-flow  { grid-template-columns: 1fr 1fr !important; row-gap: 32px !important; }
   }
-  @media (max-width: 560px) {
-    .ff-grid4 { grid-template-columns: 1fr !important; }
-    .ff-flow { grid-template-columns: 1fr !important; }
-  }
-  /* Rifinitura mobile: respiro verticale, margini laterali, tipografia */
-  @media (max-width: 760px) {
-    .ff-page section { padding-top: 60px !important; padding-bottom: 60px !important; }
-    .ff-page section > div { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Telefono — mobile-first: elementi piccoli, più spazio negativo */
+  @media (max-width: 600px) {
+    .ff-page section { padding-top: 52px !important; padding-bottom: 52px !important; }
+    .ff-page section > div { padding-left: 18px !important; padding-right: 18px !important; }
+    .ff-grid3 { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .ff-flow  { grid-template-columns: 1fr 1fr !important; column-gap: 16px !important; row-gap: 24px !important; }
+
+    .ff-page h1 { font-size: 1.7rem !important; line-height: 1.15 !important; }
+    .ff-page h2 { font-size: 1.3rem !important; line-height: 1.2 !important; }
+    .ff-page h3 { font-size: 1rem !important; }
+    .ff-page p  { font-size: 0.875rem !important; line-height: 1.5 !important; }
+    .ff-page p.ff-lede { font-size: 0.95rem !important; }
+
+    .ff-card { padding: 18px !important; border-radius: 12px !important; }
+    .ff-card > svg { width: 22px !important; height: 22px !important; }
+
+    .ff-bigstat { font-size: 40px !important; }
+    .ff-bigstat span { font-size: 22px !important; }
+
     .ff-faq-aside { position: static !important; top: auto !important; }
-  }
-  @media (max-width: 560px) {
-    .ff-bigstat { font-size: 44px !important; }
-    .ff-bigstat span { font-size: 26px !important; }
+    .ff-strip { display: none !important; }
+
+    .ff-page .eff-btn { height: 40px !important; padding: 0 16px !important; font-size: 14px !important; }
   }
 `;
 
@@ -122,7 +135,7 @@ function FatturazioneHero() {
             Fatture B2B e B2C, emesse e trasmesse allo SDI.
           </h1>
 
-          <p style={{
+          <p className="ff-lede" style={{
             margin: "24px 0 0", maxWidth: 500, fontFamily: "var(--font-sans)",
             fontSize: 19, lineHeight: 1.5, color: "var(--fg-2)",
           }}>
@@ -243,7 +256,7 @@ function SdiStrip() {
     { label: "Conserva 10 anni", done: true },
   ];
   return (
-    <div style={{
+    <div className="ff-strip" style={{
       padding: "20px 28px", border: "1px solid var(--border-1)", borderRadius: 14, background: "#fff",
       display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap",
     }}>

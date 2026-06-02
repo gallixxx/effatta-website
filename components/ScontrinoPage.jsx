@@ -18,33 +18,40 @@ const SC_CSS = `
   .sc-prod:hover { border-color: var(--eff-blue-300); transform: translateY(-2px); }
   .sc-prod:active { transform: scale(0.97); }
   @keyframes scFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  /* Tablet */
   @media (max-width: 920px) {
-    .sc-split { grid-template-columns: 1fr !important; gap: 48px !important; }
-    .sc-grid3 { grid-template-columns: 1fr !important; }
+    .sc-split { grid-template-columns: 1fr !important; gap: 44px !important; }
+    .sc-grid3 { grid-template-columns: 1fr 1fr !important; }
     .sc-grid4 { grid-template-columns: 1fr 1fr !important; }
-    .sc-flow { grid-template-columns: 1fr 1fr !important; row-gap: 36px !important; }
-    .sc-cassa { grid-template-columns: 1fr !important; }
-    .sc-cassa-cats { flex-direction: row !important; overflow-x: auto; border-right: none !important; border-bottom: 1px solid var(--border-1) !important; }
-    .sc-prodgrid { grid-template-columns: repeat(3, 1fr) !important; }
-    .sc-cart { border-left: none !important; border-top: 1px solid var(--border-1) !important; }
+    .sc-apps  { grid-template-columns: 1fr 1fr !important; }
+    .sc-flow  { grid-template-columns: 1fr 1fr !important; row-gap: 32px !important; }
   }
-  @media (max-width: 560px) {
-    .sc-grid4 { grid-template-columns: 1fr !important; }
-    .sc-flow { grid-template-columns: 1fr !important; }
-    .sc-prodgrid { grid-template-columns: repeat(2, 1fr) !important; }
-  }
-  /* Rifinitura mobile: respiro verticale, margini laterali, tipografia, cassa */
-  @media (max-width: 760px) {
-    .sc-page section { padding-top: 60px !important; padding-bottom: 60px !important; }
-    .sc-page section > div { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Telefono — mobile-first */
+  @media (max-width: 600px) {
+    .sc-page section { padding-top: 52px !important; padding-bottom: 52px !important; }
+    .sc-page section > div { padding-left: 18px !important; padding-right: 18px !important; }
+    .sc-grid3 { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .sc-apps  { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .sc-flow  { grid-template-columns: 1fr 1fr !important; column-gap: 16px !important; row-gap: 24px !important; }
+
+    .sc-page h1 { font-size: 1.7rem !important; line-height: 1.15 !important; }
+    .sc-page h2 { font-size: 1.3rem !important; line-height: 1.2 !important; }
+    .sc-page h3 { font-size: 1rem !important; }
+    .sc-page p  { font-size: 0.875rem !important; line-height: 1.5 !important; }
+    .sc-page p.sc-lede { font-size: 0.95rem !important; }
+
+    .sc-card { padding: 18px !important; border-radius: 12px !important; }
+    .sc-card > svg { width: 22px !important; height: 22px !important; }
+
+    .sc-bigstat { font-size: 40px !important; }
+    .sc-bigstat span { font-size: 22px !important; }
+
     .sc-faq-aside { position: static !important; top: auto !important; }
-    .sc-cassa { min-height: 0 !important; }
-    .sc-cart { max-height: none !important; }
-  }
-  @media (max-width: 560px) {
-    .sc-bigstat { font-size: 44px !important; }
-    .sc-bigstat span { font-size: 26px !important; }
+    .sc-strip { display: none !important; }
     .sc-receipt { margin: 0 auto !important; }
+
+    .sc-page .eff-btn { height: 40px !important; padding: 0 16px !important; font-size: 14px !important; }
   }
 `;
 
@@ -101,7 +108,7 @@ function ScontrinoHero() {
           <h1 style={{ margin: 0, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: "clamp(2.25rem, 4.6vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: "var(--fg-1)", maxWidth: 580, textWrap: "balance" }}>
             Una cassa digitale che vive nel tuo browser.
           </h1>
-          <p style={{ margin: "24px 0 0", maxWidth: 500, fontFamily: "var(--font-sans)", fontSize: 19, lineHeight: 1.5, color: "var(--fg-2)" }}>
+          <p className="sc-lede" style={{ margin: "24px 0 0", maxWidth: 500, fontFamily: "var(--font-sans)", fontSize: 19, lineHeight: 1.5, color: "var(--fg-2)" }}>
             Sostituisci il registratore telematico con Effatta Scontrino: cassa web e app mobile, con la trasmissione dei corrispettivi all'Agenzia delle Entrate già a bordo.
           </p>
           <div style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
@@ -182,7 +189,20 @@ const SC_PRODUCTS = [
   { id: "amaro", name: "Amaro", price: 4.00, cat: "alc" },
 ];
 
+function useIsMobile(bp) {
+  const [m, setM] = React.useState(false);
+  React.useEffect(() => {
+    const mq = window.matchMedia("(max-width: " + bp + "px)");
+    const on = () => setM(mq.matches);
+    on();
+    if (mq.addEventListener) mq.addEventListener("change", on); else mq.addListener(on);
+    return () => { if (mq.removeEventListener) mq.removeEventListener("change", on); else mq.removeListener(on); };
+  }, [bp]);
+  return m;
+}
+
 function CassaInteractive() {
+  const isMobile = useIsMobile(860);
   const [cat, setCat] = React.useState("tutti");
   const [cart, setCart] = React.useState({});
   const [pay, setPay] = React.useState("cash");
@@ -198,11 +218,14 @@ function CassaInteractive() {
   const reset = () => { setCart({}); setEmitted(null); setCat("tutti"); };
   const emit = () => { if (count === 0) return; setEmitted({ n: "0001-" + (Math.floor(Math.random() * 9000) + 1000), total, pay }); };
 
+  const api = { cat, setCat, shown, cart, lines, total, count, pay, setPay, emitted, add, dec, reset, emit };
+
   return (
     <section style={{ background: "var(--eff-paper-50)", padding: "96px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
         <ScHeading eyebrow="Cassa web · provala qui" title="Una cassa che apri dal browser. Tocca e prova." sub="Aggiungi prodotti, vedi il totale aggiornarsi ed emetti lo scontrino: è il vero flusso, in piccolo. Niente da installare, niente registratore telematico." style={{ marginBottom: 40 }} maxWidth={680} />
 
+        {isMobile ? <CassaMobile api={api} /> : (
         <div style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 16, overflow: "hidden", boxShadow: "var(--shadow-md)" }}>
           {/* chrome */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "14px 20px", borderBottom: "1px solid var(--border-1)", background: "var(--eff-paper-50)" }}>
@@ -326,6 +349,7 @@ function CassaInteractive() {
             </div>
           </div>
         </div>
+        )}
         <p style={{ margin: "16px 4px 0", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-3)" }}>Demo dimostrativa: nessun corrispettivo viene realmente trasmesso.</p>
       </div>
     </section>
@@ -333,9 +357,114 @@ function CassaInteractive() {
 }
 
 const qtyBtn = {
-  width: 24, height: 24, borderRadius: 6, border: "1px solid var(--border-1)", background: "#fff",
+  width: 26, height: 26, borderRadius: 6, border: "1px solid var(--border-1)", background: "#fff",
   color: "var(--fg-1)", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", padding: 0,
 };
+
+/* Cassa — layout dedicato al mobile: chip categorie, tiles 2 colonne, carrello compatto */
+function CassaMobile({ api }) {
+  const { cat, setCat, shown, cart, lines, total, count, pay, setPay, emitted, add, dec, reset, emit } = api;
+  return (
+    <div style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 14, overflow: "hidden", boxShadow: "var(--shadow-md)" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderBottom: "1px solid var(--border-1)", background: "var(--eff-paper-50)" }}>
+        <img src="assets/logos/effatta-mark-blue.svg" style={{ height: 18, display: "block" }} alt="" />
+        <div style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 13, color: "var(--fg-1)" }}>Bar dei Vicoli</div>
+        <div style={{ flex: 1 }} />
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--font-sans)", fontSize: 11, color: "var(--fg-3)" }}>
+          <span style={{ width: 6, height: 6, borderRadius: 999, background: "var(--eff-success-500)" }} />Attiva
+        </span>
+      </div>
+
+      {emitted ? (
+        <div style={{ animation: "scFade 240ms var(--ease-out)", padding: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+            <span style={{ width: 32, height: 32, borderRadius: 999, background: "var(--eff-success-50)", color: "var(--eff-success-500)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Icon name="check-circle" size={19} /></span>
+            <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 16, color: "var(--fg-1)" }}>Scontrino emesso</div>
+          </div>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--fg-3)" }}>{emitted.n} · documento commerciale</div>
+          <div style={{ marginTop: 12, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 13, color: "var(--fg-2)" }}>Totale</span>
+            <span style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 22, color: "var(--fg-1)", fontVariantNumeric: "tabular-nums" }}>€ {eur(emitted.total)}</span>
+          </div>
+          <div style={{ marginTop: 12, padding: "10px 12px", background: "var(--eff-paper-50)", borderRadius: 10, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--fg-2)", display: "flex", alignItems: "center", gap: 8 }}>
+            <Icon name="check-circle" size={14} style={{ color: "var(--eff-success-500)" }} />Trasmesso all'Agenzia delle Entrate
+          </div>
+          <Button variant="secondary" size="sm" style={{ width: "100%", marginTop: 14 }} icon="receipt" onClick={reset}>Nuovo scontrino</Button>
+        </div>
+      ) : (
+        <React.Fragment>
+          <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "12px 14px", borderBottom: "1px solid var(--border-1)", WebkitOverflowScrolling: "touch" }}>
+            {SC_CATS.map((c) => {
+              const on = cat === c.id;
+              return (
+                <button key={c.id} onClick={() => setCat(c.id)} style={{
+                  flex: "none", padding: "7px 13px", borderRadius: 999,
+                  border: on ? "1px solid var(--eff-ink-900)" : "1px solid var(--border-2)",
+                  background: on ? "var(--eff-ink-900)" : "#fff", color: on ? "#fff" : "var(--fg-2)",
+                  fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 12, cursor: "pointer", whiteSpace: "nowrap",
+                }}>{c.label}</button>
+              );
+            })}
+          </div>
+
+          <div style={{ padding: 14, background: "var(--eff-paper-50)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            {shown.map((p) => (
+              <button key={p.id} className="sc-prod" onClick={() => add(p.id)} style={{
+                display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 8, minHeight: 60,
+                background: "#fff", border: "1px solid var(--border-1)", borderRadius: 10, padding: "10px 12px", textAlign: "left", cursor: "pointer",
+              }}>
+                <span style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 12.5, color: "var(--fg-1)", lineHeight: 1.25 }}>{p.name}</span>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 13, color: "var(--fg-1)", fontVariantNumeric: "tabular-nums" }}>€ {eur(p.price)}</span>
+                  {cart[p.id] > 0 && <span style={{ minWidth: 18, height: 18, padding: "0 5px", borderRadius: 999, background: "var(--eff-blue-500)", color: "#fff", fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 10, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>{cart[p.id]}</span>}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div style={{ padding: 14, borderTop: "1px solid var(--border-1)" }}>
+            {lines.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14, maxHeight: 168, overflow: "auto" }}>
+                {lines.map((l) => (
+                  <div key={l.p.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                    <span style={{ fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--fg-1)", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{l.p.name}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <button onClick={() => dec(l.p.id)} aria-label="Rimuovi" style={qtyBtn}><Icon name="minus" size={12} strokeWidth={2.4} /></button>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--fg-1)", minWidth: 14, textAlign: "center" }}>{l.qty}</span>
+                      <button onClick={() => add(l.p.id)} aria-label="Aggiungi" style={qtyBtn}><Icon name="plus" size={12} strokeWidth={2.4} /></button>
+                    </div>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--fg-1)", fontVariantNumeric: "tabular-nums", minWidth: 52, textAlign: "right" }}>€ {eur(l.p.price * l.qty)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", background: "var(--eff-ink-900)", color: "#fff", borderRadius: 10 }}>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 12, color: "rgba(255,255,255,0.6)" }}>Totale · {count} art.</span>
+              <span style={{ fontFamily: "var(--font-sans)", fontWeight: 800, fontSize: 24, letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>€ {eur(total)}</span>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 10 }}>
+              {[["cash", "Contanti"], ["card", "Elettronico"]].map(([k, lbl]) => {
+                const on = pay === k;
+                return (
+                  <button key={k} onClick={() => setPay(k)} style={{
+                    padding: "9px 0", borderRadius: 8,
+                    border: on ? "1px solid var(--eff-ink-900)" : "1px solid var(--border-1)",
+                    background: on ? "var(--eff-ink-900)" : "#fff", color: on ? "#fff" : "var(--fg-2)",
+                    fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 12.5, cursor: "pointer",
+                  }}>{lbl}</button>
+                );
+              })}
+            </div>
+
+            <Button variant="blue" size="sm" trailingIcon="arrow-right" style={{ width: "100%", marginTop: 10, opacity: count === 0 ? 0.5 : 1, pointerEvents: count === 0 ? "none" : "auto" }} onClick={emit}>Emetti scontrino</Button>
+          </div>
+        </React.Fragment>
+      )}
+    </div>
+  );
+}
 
 /* ============================================================
  * 3 — COME FUNZIONA (flusso corrispettivi)
@@ -362,7 +491,7 @@ function ScontrinoFlow() {
             </div>
           ))}
         </div>
-        <div style={{ padding: "20px 28px", border: "1px solid var(--border-1)", borderRadius: 14, background: "var(--eff-paper-50)", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+        <div className="sc-strip" style={{ padding: "20px 28px", border: "1px solid var(--border-1)", borderRadius: 14, background: "var(--eff-paper-50)", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
           <div style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--fg-3)", marginRight: 12 }}>Il flusso dei corrispettivi</div>
           {["Vendi", "Emetti documento", "Lotteria scontrini", "Trasmetti all'AdE", "Chiusura"].map((s, i, arr) => (
             <React.Fragment key={s}>
@@ -430,7 +559,7 @@ function ScontrinoApps() {
     <section style={{ background: "#fff", padding: "96px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
         <ScHeading eyebrow="Web e mobile" title="La stessa cassa, dove ti serve." style={{ marginBottom: 48 }} />
-        <div className="sc-grid4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+        <div className="sc-apps" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
           {cards.map((c) => (
             <div key={c.title} className="sc-card" style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 16, padding: "40px 36px" }}>
               <span style={{ width: 48, height: 48, borderRadius: 12, background: "var(--eff-blue-50)", color: "var(--eff-blue-700)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Icon name={c.icon} size={24} /></span>
