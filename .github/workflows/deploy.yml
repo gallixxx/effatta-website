@@ -16,7 +16,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
+          server-dir: /lodovicog5.sg-host.com/public_html/
           # Non sovrascrivere i file gestiti a runtime sul server e non
           # pubblicare materiali interni. Include i default git/node.
           exclude: |
