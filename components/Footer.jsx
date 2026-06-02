@@ -56,7 +56,7 @@ function Footer() {
             <img
               src="assets/logos/effatta-logo-tagline-su-bianco.svg"
               alt="effatta. la facciamo facile"
-              style={{ display: "block", height: "72px", width: "auto" }} />
+              style={{ display: "block", height: "48px", width: "auto" }} />
             
             <p style={{
               margin: "8px 0 20px",
