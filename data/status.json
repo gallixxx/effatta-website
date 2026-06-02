@@ -1,0 +1,49 @@
+{
+  "updatedAt": "2026-06-02T09:00:00+02:00",
+  "services": [
+    { "id": "fatturazione", "name": "Fatturazione elettronica (SDI)", "status": "operational" },
+    { "id": "scontrino", "name": "Scontrino · Corrispettivi telematici", "status": "operational" },
+    { "id": "api", "name": "API", "status": "operational" },
+    { "id": "pannello", "name": "Pannello web e app", "status": "operational" }
+  ],
+  "scheduled": [
+    {
+      "id": "ade-2026-06-14",
+      "title": "Manutenzione programmata Agenzia delle Entrate",
+      "start": "2026-06-14T22:00:00+02:00",
+      "end": "2026-06-15T06:00:00+02:00",
+      "severity": "maintenance",
+      "services": ["fatturazione", "scontrino"],
+      "body": "L'Agenzia delle Entrate ha comunicato una manutenzione del Sistema di Interscambio. Durante questa finestra la trasmissione di fatture elettroniche e corrispettivi telematici potrebbe non essere disponibile o subire ritardi. I documenti emessi verranno messi in coda e trasmessi automaticamente al ripristino del servizio."
+    }
+  ],
+  "history": [
+    {
+      "id": "ade-2026-05-18",
+      "title": "Manutenzione programmata Agenzia delle Entrate",
+      "start": "2026-05-18T22:00:00+02:00",
+      "end": "2026-05-19T05:00:00+02:00",
+      "severity": "maintenance",
+      "status": "resolved",
+      "services": ["fatturazione", "scontrino"],
+      "body": "Manutenzione del Sistema di Interscambio comunicata dall'Agenzia delle Entrate. Il servizio è stato ripristinato regolarmente e i documenti in coda sono stati trasmessi.",
+      "updates": [
+        { "at": "2026-05-19T05:10:00+02:00", "text": "Servizio ripristinato. Trasmissione dei documenti in coda completata." }
+      ]
+    },
+    {
+      "id": "sdi-2026-04-29",
+      "title": "Rallentamenti nella trasmissione allo SDI",
+      "start": "2026-04-29T11:20:00+02:00",
+      "end": "2026-04-29T13:45:00+02:00",
+      "severity": "incident",
+      "status": "resolved",
+      "services": ["fatturazione"],
+      "body": "Abbiamo rilevato rallentamenti nella ricezione degli esiti dal Sistema di Interscambio dovuti a un disservizio lato Agenzia delle Entrate.",
+      "updates": [
+        { "at": "2026-04-29T12:05:00+02:00", "text": "Stiamo monitorando il disservizio segnalato dall'Agenzia delle Entrate." },
+        { "at": "2026-04-29T13:45:00+02:00", "text": "Il servizio è tornato regolare. Nessun documento è andato perso." }
+      ]
+    }
+  ]
+}

@@ -24,7 +24,7 @@ const FOOTER_COLS = [
   { label: "Panoramica API", href: "api.html" },
   { label: "API fatturazione", href: "api-fatturazione.html" },
   { label: "API scontrino", href: "api-scontrino.html" },
-  { label: "Stato del servizio", href: "#" }]
+  { label: "Stato del servizio", href: "stato.html" }]
 
 },
 {
