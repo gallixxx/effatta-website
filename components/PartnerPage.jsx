@@ -1,24 +1,20 @@
 /* PartnerPage.jsx — pagina Business / Partner.
  *
- * Riscritta da zero. Tema "blu scuro" business, coerente col resto del sito.
- * Due pilastri di pari dignità — API REST e White-Label — il diagramma
- * interattivo "doppio binario", i tre target (software house, associazioni
- * e ordini, commercialisti), il percorso per diventare partner, numeri e FAQ.
+ * Registro CHIARO, coerente col resto del sito (bianco + paper-50 crema,
+ * blu solo come accento, un'unica banda scura per i numeri e per la CTA —
+ * esattamente come Fatturazione e Scontrino).
  *
- * Self-contained: Icon, Button, Pill (atoms), NavBar (ink), Footer.
+ * Due pilastri di pari dignità — API REST e White-Label — diagramma
+ * "doppio binario" su fondo chiaro, i tre target, il percorso partner,
+ * numeri e FAQ. Self-contained: Icon, Button (atoms), NavBar, Footer.
  * Convenzioni responsive mobile-first scoped a .pa-page.
  */
-
-const HERO_BG = "linear-gradient(165deg, var(--eff-blue-900) 0%, var(--eff-ink-900) 100%)";
-const BLUE = "#2F80ED";
 
 const PA_CSS = `
   .pa-reveal { opacity: 0; transform: translateY(14px); transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out); }
   .pa-reveal.in { opacity: 1; transform: none; }
   .pa-card { transition: transform var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out); }
   .pa-card:hover { border-color: var(--border-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .pa-dark-card { transition: transform var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out); }
-  .pa-dark-card:hover { border-color: rgba(255,255,255,0.28); transform: translateY(-3px); }
   .pa-mode { cursor: pointer; transition: border-color var(--t-base) var(--ease-out), background var(--t-base) var(--ease-out); }
   @keyframes paFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -43,7 +39,7 @@ const PA_CSS = `
     .pa-page p  { font-size: 0.875rem !important; line-height: 1.5 !important; }
     .pa-page p.pa-lede { font-size: 0.95rem !important; }
 
-    .pa-card, .pa-dark-card { padding: 18px !important; border-radius: 12px !important; }
+    .pa-card { padding: 18px !important; border-radius: 12px !important; }
     .pa-card > svg { width: 22px !important; height: 22px !important; }
 
     .pa-bigstat { font-size: 40px !important; }
@@ -93,33 +89,33 @@ function PaHeading({ eyebrow, title, sub, light = false, maxWidth = 620, style }
 }
 
 /* ============================================================
- * 1 — HERO (blu scuro)
+ * 1 — HERO (chiaro)
  * ============================================================ */
 function PartnerHero() {
   return (
-    <section style={{ background: HERO_BG, color: "#fff", padding: "104px 0 88px", borderBottom: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", position: "relative" }}>
-      <div aria-hidden style={{ position: "absolute", top: -220, right: -200, width: 680, height: 680, background: "radial-gradient(circle at 50% 50%, rgba(47,128,237,0.28) 0%, transparent 60%)", pointerEvents: "none" }} />
+    <section style={{ background: "#fff", padding: "104px 0 96px", borderBottom: "1px solid var(--border-1)", overflow: "hidden", position: "relative" }}>
+      <div aria-hidden style={{ position: "absolute", top: -200, right: -260, width: 720, height: 720, background: "radial-gradient(circle at 50% 50%, var(--eff-blue-50) 0%, transparent 60%)", pointerEvents: "none" }} />
       <div className="pa-split" style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 64, alignItems: "center" }}>
         <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px 5px 8px", borderRadius: 999, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.14)", fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.9)", marginBottom: 24 }}>
-            <span style={{ padding: "2px 8px", borderRadius: 999, background: BLUE, color: "#fff", fontWeight: 700, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" }}>Business</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px 5px 8px", borderRadius: 999, background: "var(--eff-paper-50)", border: "1px solid var(--border-1)", fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500, color: "var(--fg-1)", marginBottom: 24 }}>
+            <span style={{ padding: "2px 8px", borderRadius: 999, background: "var(--eff-blue-500)", color: "#fff", fontWeight: 700, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" }}>Business</span>
             Partner & White-Label
           </div>
-          <h1 style={{ margin: 0, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: "clamp(2.4rem, 4.8vw, 3.6rem)", lineHeight: 1.04, letterSpacing: "-0.03em", color: "#fff", maxWidth: 600, textWrap: "balance" }}>
+          <h1 style={{ margin: 0, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: "clamp(2.4rem, 4.8vw, 3.6rem)", lineHeight: 1.04, letterSpacing: "-0.03em", color: "var(--fg-1)", maxWidth: 600, textWrap: "balance" }}>
             La tua offerta fiscale, sul nostro motore.
           </h1>
-          <p className="pa-lede" style={{ margin: "22px 0 0", maxWidth: 520, fontFamily: "var(--font-sans)", fontSize: 19, lineHeight: 1.5, color: "rgba(255,255,255,0.72)" }}>
-            Integri Effatta via <strong style={{ color: "#fff", fontWeight: 600 }}>API</strong> nel tuo software o lo offri in <strong style={{ color: "#fff", fontWeight: 600 }}>white-label</strong> col tuo brand. SDI, conservazione e scontrini restano dietro le quinte — davanti ci sei tu.
+          <p className="pa-lede" style={{ margin: "22px 0 0", maxWidth: 520, fontFamily: "var(--font-sans)", fontSize: 19, lineHeight: 1.5, color: "var(--fg-2)" }}>
+            Integri Effatta via <strong style={{ color: "var(--fg-1)", fontWeight: 600 }}>API</strong> nel tuo software o lo offri in <strong style={{ color: "var(--fg-1)", fontWeight: 600 }}>white-label</strong> col tuo brand. SDI, conservazione e scontrini restano dietro le quinte — davanti ci sei tu.
           </p>
           <div style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
             <Button variant="blue" trailingIcon="arrow-right" as="a" href="contatti.html">Diventa partner</Button>
             <Button variant="secondary" as="a" href="api.html">Documentazione API</Button>
           </div>
-          <div style={{ display: "flex", gap: 32, marginTop: 40, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 32, marginTop: 36, paddingTop: 28, borderTop: "1px solid var(--border-1)", flexWrap: "wrap" }}>
             {[["100M+", "fatture gestite"], ["10M+", "scontrini emessi"], ["10K+", "clienti attivi"]].map(([v, l]) => (
               <div key={l}>
-                <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 24, letterSpacing: "-0.02em", color: "#fff", fontVariantNumeric: "tabular-nums" }}>{v}</div>
-                <div style={{ marginTop: 4, fontFamily: "var(--font-sans)", fontSize: 12.5, color: "rgba(255,255,255,0.55)" }}>{l}</div>
+                <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 24, letterSpacing: "-0.02em", color: "var(--fg-1)", fontVariantNumeric: "tabular-nums" }}>{v}</div>
+                <div style={{ marginTop: 4, fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--fg-3)" }}>{l}</div>
               </div>
             ))}
           </div>
@@ -131,28 +127,28 @@ function PartnerHero() {
   );
 }
 
-/* Card "infrastruttura" — anticipa il core del diagramma */
+/* Card "infrastruttura" — chiara */
 function InfraCard() {
   return (
-    <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 16, padding: 24, backdropFilter: "blur(4px)" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
-        <img src="assets/logos/effatta-mark-white.svg" alt="" style={{ height: 22, display: "block" }} onError={(e) => { e.currentTarget.style.display = "none"; }} />
-        <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 15, color: "#fff" }}>Effatta · infrastruttura fiscale</div>
+    <div style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 16, padding: 24, boxShadow: "var(--shadow-md)" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+        <img src="assets/logos/effatta-mark-blue.svg" alt="" style={{ height: 22, display: "block" }} />
+        <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 15, color: "var(--fg-1)" }}>Effatta · infrastruttura fiscale</div>
       </div>
       {[
-        { lbl: "Sistema di Interscambio", val: "online", ok: true },
-        { lbl: "Conservazione a norma", val: "10 anni", ok: true },
-        { lbl: "Corrispettivi telematici", val: "attivi", ok: true },
-        { lbl: "Sandbox", val: "24/7", ok: true },
+        { lbl: "Sistema di Interscambio", val: "online" },
+        { lbl: "Conservazione a norma", val: "10 anni" },
+        { lbl: "Corrispettivi telematici", val: "attivi" },
+        { lbl: "Sandbox", val: "24/7" },
       ].map((r) => (
-        <div key={r.lbl} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "11px 0", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "var(--font-sans)", fontSize: 14, color: "rgba(255,255,255,0.82)" }}>
+        <div key={r.lbl} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "11px 0", borderTop: "1px solid var(--border-1)" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "var(--font-sans)", fontSize: 14, color: "var(--fg-2)" }}>
             <span style={{ width: 7, height: 7, borderRadius: 999, background: "var(--eff-success-500)" }} />{r.lbl}
           </span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "rgba(255,255,255,0.6)" }}>{r.val}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--fg-3)" }}>{r.val}</span>
         </div>
       ))}
-      <div style={{ marginTop: 16, padding: "12px 14px", borderRadius: 10, background: "rgba(47,128,237,0.14)", border: "1px solid rgba(47,128,237,0.35)", fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(255,255,255,0.85)" }}>
+      <div style={{ marginTop: 16, padding: "12px 14px", borderRadius: 10, background: "var(--eff-blue-50)", border: "1px solid var(--eff-blue-300)", fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-1)" }}>
         Tu costruisci sopra. Noi teniamo il passo con la normativa.
       </div>
     </div>
@@ -180,7 +176,7 @@ function PartnerPillars() {
     },
   ];
   return (
-    <section style={{ background: "#fff", padding: "96px 0", borderBottom: "1px solid var(--border-1)" }}>
+    <section style={{ background: "var(--eff-paper-50)", padding: "96px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
         <PaHeading eyebrow="Due modi, stessa infrastruttura" title="API e White-Label. Stessa dignità, scopi diversi." sub="Puoi scegliere uno dei due o combinarli: l'integrazione tecnica nel tuo software e la distribuzione col tuo brand non si escludono." style={{ marginBottom: 48 }} maxWidth={680} />
         <div className="pa-pillars" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
@@ -211,7 +207,7 @@ function PartnerPillars() {
 }
 
 /* ============================================================
- * 3 — DOPPIO BINARIO (diagramma interattivo)
+ * 3 — DOPPIO BINARIO (diagramma interattivo, su chiaro)
  * ============================================================ */
 function DoppioBinario() {
   const [track, setTrack] = React.useState("api");
@@ -220,9 +216,9 @@ function DoppioBinario() {
     wl:  { title: "Il tuo brand", sub: "white-label", icon: "layers", detail: "Offri il portale Effatta con il tuo dominio, logo e colori. I tuoi clienti emettono in autonomia; tu controlli brand, margini e parco clienti da un'unica regia." },
   };
   return (
-    <section style={{ background: "var(--eff-blue-900)", color: "#fff", padding: "96px 0", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+    <section style={{ background: "#fff", padding: "96px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 32px" }}>
-        <PaHeading light eyebrow="Doppio binario" title="Un solo motore. Due modi di portarlo ai tuoi clienti." sub="API e white-label corrono sulla stessa infrastruttura: SDI, firma, conservazione e corrispettivi. Tocca un binario per vederlo." style={{ marginBottom: 44, marginInline: "auto", textAlign: "center" }} maxWidth={680} />
+        <PaHeading eyebrow="Doppio binario" title="Un solo motore. Due modi di portarlo ai tuoi clienti." sub="API e white-label corrono sulla stessa infrastruttura: SDI, firma, conservazione e corrispettivi. Tocca un binario per vederlo." style={{ marginBottom: 44, marginInline: "auto", textAlign: "center" }} maxWidth={680} />
 
         <div className="pa-binario-top" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 720, margin: "0 auto" }}>
           {["api", "wl"].map((k) => {
@@ -230,33 +226,33 @@ function DoppioBinario() {
             return (
               <button key={k} className="pa-mode" onClick={() => setTrack(k)} style={{
                 textAlign: "left", borderRadius: 14, padding: "18px 20px",
-                background: on ? "rgba(47,128,237,0.16)" : "rgba(255,255,255,0.04)",
-                border: on ? "1px solid " + BLUE : "1px solid rgba(255,255,255,0.12)",
-                color: "#fff", cursor: "pointer",
+                background: on ? "var(--eff-blue-50)" : "#fff",
+                border: on ? "1px solid var(--eff-blue-500)" : "1px solid var(--border-1)",
+                cursor: "pointer",
               }}>
-                <span style={{ width: 38, height: 38, borderRadius: 10, display: "inline-flex", alignItems: "center", justifyContent: "center", background: on ? BLUE : "rgba(255,255,255,0.08)", color: "#fff" }}><Icon name={m.icon} size={20} /></span>
-                <div style={{ marginTop: 14, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 18, letterSpacing: "-0.015em" }}>{m.title}</div>
-                <div style={{ marginTop: 2, fontFamily: "var(--font-mono)", fontSize: 12.5, color: "rgba(255,255,255,0.6)" }}>{m.sub}</div>
+                <span style={{ width: 38, height: 38, borderRadius: 10, display: "inline-flex", alignItems: "center", justifyContent: "center", background: on ? "var(--eff-blue-500)" : "var(--eff-paper-100)", color: on ? "#fff" : "var(--fg-1)" }}><Icon name={m.icon} size={20} /></span>
+                <div style={{ marginTop: 14, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 18, letterSpacing: "-0.015em", color: "var(--fg-1)" }}>{m.title}</div>
+                <div style={{ marginTop: 2, fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--fg-3)" }}>{m.sub}</div>
               </button>
             );
           })}
         </div>
 
         <svg className="pa-connector" viewBox="0 0 320 56" preserveAspectRatio="none" style={{ width: "100%", maxWidth: 720, height: 56, display: "block", margin: "0 auto" }}>
-          <path d="M80 2 L160 54" fill="none" strokeWidth="2" stroke={track === "api" ? BLUE : "rgba(255,255,255,0.18)"} />
-          <path d="M240 2 L160 54" fill="none" strokeWidth="2" stroke={track === "wl" ? BLUE : "rgba(255,255,255,0.18)"} />
+          <path d="M80 2 L160 54" fill="none" strokeWidth="2" stroke={track === "api" ? "var(--eff-blue-500)" : "var(--border-2)"} />
+          <path d="M240 2 L160 54" fill="none" strokeWidth="2" stroke={track === "wl" ? "var(--eff-blue-500)" : "var(--border-2)"} />
         </svg>
 
-        <div style={{ maxWidth: 460, margin: "0 auto", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 16, padding: "22px 24px", textAlign: "center" }}>
-          <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 17, color: "#fff" }}>Effatta · core</div>
+        <div style={{ maxWidth: 460, margin: "0 auto", background: "var(--eff-paper-50)", border: "1px solid var(--border-1)", borderRadius: 16, padding: "22px 24px", textAlign: "center" }}>
+          <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 17, color: "var(--fg-1)" }}>Effatta · core</div>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center", marginTop: 14 }}>
             {["SDI", "Firma digitale", "Conservazione", "Corrispettivi"].map((c) => (
-              <span key={c} style={{ fontFamily: "var(--font-sans)", fontSize: 12.5, fontWeight: 500, color: "rgba(255,255,255,0.85)", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 999, padding: "5px 12px" }}>{c}</span>
+              <span key={c} style={{ fontFamily: "var(--font-sans)", fontSize: 12.5, fontWeight: 500, color: "var(--fg-2)", background: "#fff", border: "1px solid var(--border-1)", borderRadius: 999, padding: "5px 12px" }}>{c}</span>
             ))}
           </div>
         </div>
 
-        <p key={track} style={{ animation: "paFade 240ms var(--ease-out)", maxWidth: 600, margin: "24px auto 0", textAlign: "center", fontFamily: "var(--font-sans)", fontSize: 15.5, lineHeight: 1.6, color: "rgba(255,255,255,0.78)" }}>
+        <p key={track} style={{ animation: "paFade 240ms var(--ease-out)", maxWidth: 600, margin: "24px auto 0", textAlign: "center", fontFamily: "var(--font-sans)", fontSize: 15.5, lineHeight: 1.6, color: "var(--fg-2)" }}>
           {modes[track].detail}
         </p>
       </div>
@@ -332,7 +328,7 @@ function PartnerHow() {
 }
 
 /* ============================================================
- * 6 — NUMERI (banda scura)
+ * 6 — NUMERI (unica banda scura, coerente col sito)
  * ============================================================ */
 const PA_STATS = [
   { value: 100, suffix: "M+", label: "fatture trasmesse allo SDI", sub: "Dal 2018 a oggi" },
@@ -442,22 +438,22 @@ function PaFaqRow({ item, isOpen, onToggle, isFirst }) {
 }
 
 /* ============================================================
- * 8 — CTA FINALE (blu scuro)
+ * 8 — CTA FINALE (banda scura, come Fatturazione/Scontrino)
  * ============================================================ */
 function PartnerCTA() {
   return (
-    <section style={{ background: HERO_BG, color: "#fff", padding: "96px 0" }}>
+    <section style={{ background: "var(--eff-ink-900)", color: "#fff", padding: "96px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 32px", textAlign: "center" }}>
-        <div style={{ display: "inline-block", padding: "4px 10px", borderRadius: 999, background: BLUE, color: "#fff", fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 24 }}>Diventa partner</div>
+        <div style={{ display: "inline-block", padding: "4px 10px", borderRadius: 999, background: "var(--eff-blue-500)", color: "#fff", fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 24 }}>Diventa partner</div>
         <h2 style={{ margin: 0, fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: "clamp(2rem, 4vw, 2.75rem)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "#fff" }}>
           Una proposta su misura in 48 ore.
         </h2>
-        <p style={{ margin: "20px auto 0", maxWidth: 560, fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.55, color: "rgba(255,255,255,0.72)" }}>
+        <p style={{ margin: "20px auto 0", maxWidth: 560, fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.55, color: "rgba(255,255,255,0.7)" }}>
           Raccontaci il tuo caso d'uso. Ti rispondiamo con un piano commerciale, una sandbox attiva e un account manager dedicato.
         </p>
         <div style={{ marginTop: 36, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <Button variant="blue" trailingIcon="arrow-right" as="a" href="contatti.html">Richiedi un contatto</Button>
-          <Button variant="secondary" as="a" href="api.html">Documentazione API</Button>
+          <Button variant="secondary" trailingIcon="arrow-right" as="a" href="contatti.html">Richiedi un contatto</Button>
+          <a href="api.html" style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 15, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", height: 44, padding: "0 8px", borderBottom: "1px solid rgba(255,255,255,0.4)", alignSelf: "center" }}>Documentazione API</a>
         </div>
       </div>
     </section>
