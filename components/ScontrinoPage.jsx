@@ -33,6 +33,19 @@ const SC_CSS = `
     .sc-flow { grid-template-columns: 1fr !important; }
     .sc-prodgrid { grid-template-columns: repeat(2, 1fr) !important; }
   }
+  /* Rifinitura mobile: respiro verticale, margini laterali, tipografia, cassa */
+  @media (max-width: 760px) {
+    .sc-page section { padding-top: 60px !important; padding-bottom: 60px !important; }
+    .sc-page section > div { padding-left: 20px !important; padding-right: 20px !important; }
+    .sc-faq-aside { position: static !important; top: auto !important; }
+    .sc-cassa { min-height: 0 !important; }
+    .sc-cart { max-height: none !important; }
+  }
+  @media (max-width: 560px) {
+    .sc-bigstat { font-size: 44px !important; }
+    .sc-bigstat span { font-size: 26px !important; }
+    .sc-receipt { margin: 0 auto !important; }
+  }
 `;
 
 function ScontrinoPage() {
@@ -46,7 +59,7 @@ function ScontrinoPage() {
   }, []);
 
   return (
-    <div>
+    <div className="sc-page">
       <style>{SC_CSS}</style>
       <ScontrinoHero />
       <div className="sc-reveal"><CassaInteractive /></div>
@@ -117,7 +130,7 @@ function ScontrinoHero() {
 function ReceiptMock() {
   const rows = [["1×", "Espresso", "1,20"], ["2×", "Cappuccino", "3,00"], ["1×", "Pizza margherita", "8,00"], ["1×", "Coperto", "2,00"]];
   return (
-    <div style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 16, padding: 28, maxWidth: 420, margin: "0 0 0 auto", boxShadow: "var(--shadow-md)" }}>
+    <div className="sc-receipt" style={{ background: "#fff", border: "1px solid var(--border-1)", borderRadius: 16, padding: 28, maxWidth: 420, margin: "0 0 0 auto", boxShadow: "var(--shadow-md)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 14, color: "var(--fg-1)" }}>Documento commerciale</div>
         <Pill tone="success">Emesso</Pill>
@@ -493,7 +506,7 @@ function ScCountStat({ stat, seen, index }) {
 
   return (
     <div style={{ padding: "36px 36px 32px", borderLeft, borderTop }}>
-      <div style={{ fontFamily: "var(--font-sans)", fontSize: 60, lineHeight: 1, letterSpacing: "-0.035em", color: "#fff", fontVariantNumeric: "tabular-nums", fontWeight: 700 }}>
+      <div className="sc-bigstat" style={{ fontFamily: "var(--font-sans)", fontSize: 60, lineHeight: 1, letterSpacing: "-0.035em", color: "#fff", fontVariantNumeric: "tabular-nums", fontWeight: 700 }}>
         {display}<span style={{ fontSize: 34, fontWeight: 800 }}>{stat.suffix}</span>
       </div>
       <div style={{ marginTop: 16, fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 260, lineHeight: 1.4 }}>{stat.label}</div>
@@ -519,7 +532,7 @@ function ScontrinoFAQ() {
   return (
     <section style={{ background: "#fff", padding: "112px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div className="sc-split" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 80, alignItems: "flex-start" }}>
-        <div style={{ position: "sticky", top: 96 }}>
+        <div className="sc-faq-aside" style={{ position: "sticky", top: 96 }}>
           <ScHeading eyebrow="Domande frequenti" title="Le cose che ci chiedono sullo scontrino." sub="Non hai trovato la risposta? Ti risponde una persona vera entro 24 ore lavorative." maxWidth={340} />
           <div style={{ marginTop: 28 }}>
             <Button variant="secondary" size="md" trailingIcon="arrow-right" as="a" href="contatti.html">Parla con noi</Button>

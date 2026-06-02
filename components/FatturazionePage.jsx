@@ -26,6 +26,16 @@ const FATT_CSS = `
     .ff-grid4 { grid-template-columns: 1fr !important; }
     .ff-flow { grid-template-columns: 1fr !important; }
   }
+  /* Rifinitura mobile: respiro verticale, margini laterali, tipografia */
+  @media (max-width: 760px) {
+    .ff-page section { padding-top: 60px !important; padding-bottom: 60px !important; }
+    .ff-page section > div { padding-left: 20px !important; padding-right: 20px !important; }
+    .ff-faq-aside { position: static !important; top: auto !important; }
+  }
+  @media (max-width: 560px) {
+    .ff-bigstat { font-size: 44px !important; }
+    .ff-bigstat span { font-size: 26px !important; }
+  }
 `;
 
 function FatturazionePage() {
@@ -39,7 +49,7 @@ function FatturazionePage() {
   }, []);
 
   return (
-    <div>
+    <div className="ff-page">
       <style>{FATT_CSS}</style>
       <FatturazioneHero />
       <div className="ff-reveal"><FatturazioneFlow /></div>
@@ -443,7 +453,7 @@ function CountStat({ stat, seen, index }) {
 
   return (
     <div style={{ padding: "36px 36px 32px", borderLeft, borderTop }}>
-      <div style={{ fontFamily: "var(--font-sans)", fontSize: 60, lineHeight: 1, letterSpacing: "-0.035em", color: "#fff", fontVariantNumeric: "tabular-nums", fontWeight: 700 }}>
+      <div className="ff-bigstat" style={{ fontFamily: "var(--font-sans)", fontSize: 60, lineHeight: 1, letterSpacing: "-0.035em", color: "#fff", fontVariantNumeric: "tabular-nums", fontWeight: 700 }}>
         {display}<span style={{ fontSize: 34, fontWeight: 800 }}>{stat.suffix}</span>
       </div>
       <div style={{ marginTop: 16, fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 260, lineHeight: 1.4 }}>{stat.label}</div>
@@ -469,7 +479,7 @@ function FatturazioneFAQ() {
   return (
     <section style={{ background: "#fff", padding: "112px 0", borderBottom: "1px solid var(--border-1)" }}>
       <div className="ff-split" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 80, alignItems: "flex-start" }}>
-        <div style={{ position: "sticky", top: 96 }}>
+        <div className="ff-faq-aside" style={{ position: "sticky", top: 96 }}>
           <FfHeading eyebrow="Domande frequenti" title="Le cose che ci chiedono sulla fatturazione." sub="Non hai trovato la risposta? Ti risponde una persona vera entro 24 ore lavorative." maxWidth={340} />
           <div style={{ marginTop: 28 }}>
             <Button variant="secondary" size="md" trailingIcon="arrow-right" as="a" href="contatti.html">Parla con noi</Button>
