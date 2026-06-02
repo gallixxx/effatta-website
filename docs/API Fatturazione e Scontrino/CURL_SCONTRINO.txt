@@ -1,0 +1,44 @@
+// LOGIN
+curl --location --request POST 'https://sandboxscontrino.effatta.it/api/v1/ade/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "fiscalCode": "sandbox",
+    "password": "sandbox",
+    "pin": "sandbox",
+    "vat": "sandbox"
+}'
+
+// LOGOUT
+curl --location --request GET 'https://sandboxscontrino.effatta.it/api/v1/ade/logout' \
+--header 'Authorization: Bearer {{token}}'
+
+// GET DOCS
+curl --location --request GET 'https://sandboxscontrino.effatta.it/api/v1/ade/docs?offset=1' \
+--header 'Authorization: Bearer {{token}}' \
+
+--startDate/endDate=MM/DD/YY es 1 marzo 2026 03/01/26
+curl --location --request GET 'https://scontrino.effatta.it/api/v1/ade/docs?startDate=03/01/26&endDate=03/08/26&pagination=100' \
+--header 'Authorization: Bearer 'token'
+
+// CREATE DOCS
+curl --location --request POST 'https://sandboxscontrino.effatta.it/api/v1/ade/docs' \
+--header 'Authorization: Bearer {{token}}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "lotteryCode": "",
+    "items": [
+        {"qty": 1, "amount": 0.01, "description": "test", "vat": "4"}
+    ],
+    "payment": {
+        "cash": 0.01
+    }
+}'
+
+// CANCEL DOC
+curl --location -g --request POST 'https://sandboxscontrino.effatta.it/api/v1/ade/docs/{{documentId}}' \
+--header 'Authorization: Bearer {{token}}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "refund",
+    "items": [ 1 ]
+}'
