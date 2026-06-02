@@ -17,3 +17,14 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/
+          # Non sovrascrivere i file gestiti a runtime sul server e non
+          # pubblicare materiali interni. Include i default git/node.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            docs/**
+            data/status.json
+            bot/config.php
+            bot/state.json

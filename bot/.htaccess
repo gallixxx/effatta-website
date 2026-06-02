@@ -1,0 +1,6 @@
+# Protegge i file sensibili del bot dall'accesso diretto via web.
+# telegram.php resta accessibile (è il webhook); tutto il resto è bloccato.
+
+<FilesMatch "(config\.php|config\.sample\.php|state\.json|README\.md)$">
+  Require all denied
+</FilesMatch>

@@ -1,0 +1,10 @@
+# Segreti e stato runtime del bot Telegram (vivono solo sul server)
+bot/config.php
+bot/state.json
+
+# Stato di sincronizzazione del deploy FTP
+.ftp-deploy-sync-state.json
+
+# Sistema
+.DS_Store
+Thumbs.db
