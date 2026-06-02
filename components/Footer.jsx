@@ -21,9 +21,9 @@ const FOOTER_COLS = [
 {
   title: "Sviluppatori",
   links: [
-  { label: "API fatturazione", href: "api.html#invoices" },
-  { label: "API scontrino", href: "api.html#receipts" },
-  { label: "Sandbox", href: "api.html#auth" },
+  { label: "Panoramica API", href: "api.html" },
+  { label: "API fatturazione", href: "api-fatturazione.html" },
+  { label: "API scontrino", href: "api-scontrino.html" },
   { label: "Stato del servizio", href: "#" }]
 
 },
