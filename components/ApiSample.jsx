@@ -1,15 +1,15 @@
-/* ApiSample.jsx — banda enterprise ink-on-paper. A sinistra il
- * posizionamento per software house, gestionali e clienti enterprise;
- * a destra una scheda con le garanzie concrete della piattaforma
- * (niente snippet di codice: l'integrazione è simile per tutti, il
- * valore è l'infrastruttura sotto). */
-const ENTERPRISE_SPECS = [
-  { k: "Disponibilità", v: "Uptime monitorato 24/7" },
+/* ApiSample.jsx — banda software house ink-on-paper. A sinistra il
+ * posizionamento per chi sviluppa gestionali e integra Effatta via API;
+ * a destra una scheda con cosa offre la piattaforma da integrare.
+ * Niente snippet di codice: il valore non è il codice (simile per tutti)
+ * ma l'integrazione coordinata, il white-label e il modello commerciale. */
+const INTEGRATION_SPECS = [
+  { k: "API", v: "Fatturazione + scontrino, una sola auth" },
+  { k: "SDK", v: "Node, Python, PHP, Go" },
+  { k: "Multi-cliente", v: "Un sotto-account isolato per cliente" },
+  { k: "White-label", v: "Dominio, logo ed e-mail tuoi" },
   { k: "Sicurezza", v: "Certificazione ISO · dati in UE" },
-  { k: "Scala", v: "Migliaia di documenti al giorno" },
-  { k: "Integrazione", v: "REST API · webhook · SDK" },
-  { k: "Conservazione", v: "10 anni a norma, inclusa" },
-  { k: "Supporto", v: "Account manager dedicato" },
+  { k: "Conservazione", v: "10 anni a norma, gestita da Effatta" },
   { k: "Modello", v: "Prezzo sui volumi, su misura" },
 ];
 
@@ -17,7 +17,7 @@ function ApiSample({ density = "spacious" }) {
   const pad = density === "compact" ? "64px 0" : "96px 0";
 
   return (
-    <section id="api" data-screen-label="Enterprise / software house" style={{ background: "var(--eff-ink-900)", padding: pad, color: "#fff" }}>
+    <section id="api" data-screen-label="Software house e gestionali" style={{ background: "var(--eff-ink-900)", padding: pad, color: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 72, alignItems: "center" }}>
           <div>
@@ -30,7 +30,7 @@ function ApiSample({ density = "spacious" }) {
                 marginBottom: 16,
               }}
             >
-              Per software house, gestionali ed enterprise
+              Per software house e gestionali
             </div>
             <h2
               style={{
@@ -44,7 +44,7 @@ function ApiSample({ density = "spacious" }) {
                 maxWidth: 460,
               }}
             >
-              L'infrastruttura fiscale che regge i tuoi volumi.
+              Il motore fiscale dentro il tuo gestionale.
             </h2>
             <p
               style={{
@@ -56,11 +56,11 @@ function ApiSample({ density = "spacious" }) {
                 maxWidth: 460,
               }}
             >
-              Una sola piattaforma per fatture e scontrini, pensata per chi emette migliaia di documenti al giorno e per chi integra Effatta nel proprio gestionale. API stabili, sicurezza certificata, conservazione inclusa — e un'offerta cucita sui tuoi volumi.
+              Integri fatture e scontrini nel tuo software con due API coordinate e li rivendi come tuoi. Effatta normalizza, firma, trasmette allo SDI e conserva — il tuo gestionale resta in primo piano. Niente listino fisso: il prezzo segue i tuoi volumi.
             </p>
 
             <ul style={{ listStyle: "none", margin: "0 0 36px", padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-              {["Architettura multi-tenant: un account isolato per cliente", "Sicurezza certificata ISO, dati in UE", "Conservazione a norma per 10 anni, inclusa", "Account manager dedicato e offerta sui volumi"].map((b) => (
+              {["Due API coordinate: fatturazione e scontrino", "Un sotto-account isolato per ogni cliente", "White-label completo: dominio, logo, e-mail", "Pricing per volume, senza listino fisso"].map((b) => (
                 <li
                   key={b}
                   style={{
@@ -80,8 +80,8 @@ function ApiSample({ density = "spacious" }) {
             </ul>
 
             <div style={{ display: "flex", gap: 12 }}>
-              <Button as="a" href="contatti.html" trailingIcon="arrow-right" variant="secondary">
-                Parla con noi
+              <Button as="a" href="software-house.html" trailingIcon="arrow-right" variant="secondary">
+                Per le software house
               </Button>
               <a
                 href="api.html"
@@ -121,17 +121,17 @@ function ApiSample({ density = "spacious" }) {
                 borderBottom: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <Icon name="shield-check" size={18} strokeWidth={1.6} style={{ color: "rgba(255,255,255,0.7)" }} />
+              <Icon name="code-2" size={18} strokeWidth={1.6} style={{ color: "rgba(255,255,255,0.7)" }} />
               <span style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 14, color: "#fff" }}>
-                Pronta per l'enterprise
+                Cosa integri
               </span>
               <div style={{ flex: 1 }} />
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "rgba(255,255,255,0.45)" }}>
-                SLA su misura
+                OpenAPI 3.1
               </span>
             </div>
             <div style={{ padding: "8px 24px 12px" }}>
-              {ENTERPRISE_SPECS.map((s, i) => (
+              {INTEGRATION_SPECS.map((s, i) => (
                 <div
                   key={s.k}
                   style={{
