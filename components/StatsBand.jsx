@@ -9,7 +9,7 @@ const STATS = [
 { value: 100, suffix: "M+", label: "fatture gestite sulla piattaforma", sub: "Dal 2018 a oggi" },
 { value: 10, suffix: "M+", label: "scontrini emessi con Effatta", sub: "Cassa web + API" },
 { value: 10, suffix: "K+", label: "partite IVA che ci usano ogni giorno", sub: "Tra dirette e canale" },
-{ value: 99.9, suffix: "%", label: "uptime trasmissione SDI", sub: "Misurato nel 2025" }];
+{ text: "ISO 27001", label: "certificazione sicurezza delle informazioni", sub: "Audit indipendente" }];
 
 
 function StatsBand({ density = "spacious" }) {
@@ -90,9 +90,10 @@ function StatsBand({ density = "spacious" }) {
 
 function StatCell({ stat, seen, index }) {
   const [n, setN] = React.useState(0);
-  const isDecimal = !Number.isInteger(stat.value);
+  const isText = typeof stat.text === "string";
+  const isDecimal = !isText && !Number.isInteger(stat.value);
   React.useEffect(() => {
-    if (!seen) return;
+    if (!seen || isText) return;
     const dur = 1100;
     const start = performance.now() + index * 80;
     let raf;
@@ -119,6 +120,13 @@ function StatCell({ stat, seen, index }) {
       padding: "36px 36px 32px",
       borderLeft, borderTop
     }}>
+      {isText ?
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: 46, lineHeight: 1, letterSpacing: "-0.03em",
+        color: "#fff", fontWeight: "700"
+      }}>{stat.text}</div> :
+
       <div style={{
         fontFamily: "var(--font-sans)",
         fontSize: 64, lineHeight: 1, letterSpacing: "-0.035em",
@@ -126,7 +134,7 @@ function StatCell({ stat, seen, index }) {
         fontVariantNumeric: "tabular-nums", fontWeight: "700"
       }}>
         {display}<span style={{ fontSize: "40px", color: "rgb(255, 255, 255)", fontWeight: "900" }}>{stat.suffix}</span>
-      </div>
+      </div>}
       <div style={{
         marginTop: 16,
         fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 15,

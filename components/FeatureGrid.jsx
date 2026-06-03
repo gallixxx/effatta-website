@@ -4,40 +4,40 @@ const FEATURES = {
     {
       icon: "file-text",
       title: "Fatture elettroniche",
-      desc: "Emetti, trasmetti allo SDI, archivia. La ricevuta torna nella dashboard, non in PEC.",
-      bullets: ["B2B, B2C e PA", "Note di credito", "Reverse charge"],
+      desc: "Crei e invii la fattura in pochi secondi. Parte da sola verso lo SDI e la ricevuta torna nella tua dashboard — niente PEC da controllare.",
+      bullets: ["Invio allo SDI automatico", "Verso clienti, privati e PA", "Avviso subito se viene scartata"],
     },
     {
       icon: "receipt",
-      title: "Scontrini digitali",
-      desc: "Sostituisci il registratore telematico con la cassa web Effatta. Documento commerciale, lotteria degli scontrini, corrispettivi all'AdE: tutto a bordo.",
-      bullets: ["Cassa web", "App mobile", "Documento commerciale"],
+      title: "Scontrini e cassa",
+      desc: "Al posto del registratore telematico, la cassa web Effatta: emetti il documento commerciale da telefono, tablet o PC. Pagamento e scontrino restano collegati, come chiede la norma dal 2026.",
+      bullets: ["Conforme POS-RT 2026", "Lotteria degli scontrini", "Da smartphone, tablet o PC"],
     },
     {
-      icon: "shield-check",
-      title: "Conservazione a norma",
-      desc: "10 anni di conservazione inclusa nei piani da Standard in su. Firmata, certificata, esibizione in PDF/A.",
-      bullets: ["Firma digitale", "Esibizione AdE", "Export annuale"],
+      icon: "smartphone",
+      title: "Tutto dal telefono",
+      desc: "Fatture, scontrini e incassi in un'unica app, sempre sincronizzati tra telefono e PC. La conservazione a norma per 10 anni è già inclusa: ci pensiamo noi.",
+      bullets: ["App iOS e Android", "Tutto sincronizzato", "Conservazione 10 anni inclusa"],
     },
   ],
   partner: [
     {
       icon: "code-2",
-      title: "REST API",
-      desc: "Due API REST coordinate, una sola autenticazione. SDK ufficiali in Node, Python, PHP, Go. OpenAPI 3.1.",
-      bullets: ["API fatturazione", "API scontrino", "Sandbox dedicata"],
+      title: "API e SDK",
+      desc: "Due API REST coordinate per fatture e scontrini, una sola autenticazione. SDK ufficiali, webhook firmati e sandbox sempre attiva.",
+      bullets: ["Node, Python, PHP, Go", "Webhook HMAC-SHA256", "OpenAPI 3.1"],
     },
     {
-      icon: "webhook",
-      title: "Webhook in tempo reale",
-      desc: "Ogni transizione SDI atterra come evento firmato. Retry esponenziale automatico, niente polling da fare.",
-      bullets: ["HMAC-SHA256", "Retry esponenziale", "Replay evento"],
+      icon: "layers",
+      title: "White-label e multi-tenant",
+      desc: "Rivendi col tuo brand: dominio, logo, e-mail di sistema e portale cliente. Un sotto-account isolato per ogni cliente, con fatturazione separata.",
+      bullets: ["Branding completo", "Sotto-account illimitati", "Effatta dietro le quinte"],
     },
     {
-      icon: "key-round",
-      title: "White-label completo",
-      desc: "Dominio, logo, e-mail di sistema, portale cliente: tutto firmato con il tuo brand. Effatta resta dietro le quinte.",
-      bullets: ["Sotto-account", "Branding totale", "Multi-tenant"],
+      icon: "users",
+      title: "Gestione multi-cliente",
+      desc: "Per associazioni e studi: segui tutti i tuoi clienti da un unico pannello, con permessi per i collaboratori e un rendiconto consolidato.",
+      bullets: ["Pannello unico", "Permessi per collaboratori", "Report per cliente"],
     },
   ],
 };
@@ -65,7 +65,7 @@ function FeatureGrid({ audience, density = "spacious" }) {
               color: "var(--fg-3)",
               marginBottom: 16,
             }}>
-              {audience === "partner" ? "Per partner · stack tecnico" : "Per esercenti · cosa fai con Effatta"}
+              {audience === "partner" ? "Per partner · piattaforma e canale" : "Per esercenti · cosa fai con Effatta"}
             </div>
             <h2 style={{
               margin: 0,
@@ -99,7 +99,7 @@ function FeatureGrid({ audience, density = "spacious" }) {
               paddingBottom: 2,
             }}
           >
-            {audience === "partner" ? "Vedi le API e gli SDK" : "Vedi tutte le funzioni"}
+            {audience === "partner" ? "Scopri il programma partner" : "Vedi tutte le funzioni"}
           </a>
         </div>
 

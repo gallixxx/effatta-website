@@ -4,23 +4,23 @@
 const PARTNER_TYPES = [
   {
     tag: "Software house",
-    title: "Integri Effatta, lo rivendi come tuo.",
-    desc: "API REST e webhook. Un sotto-account per ogni cliente. Branding, dominio ed e-mail tue.",
-    proof: "Il tuo brand resta davanti, Effatta lavora dietro le quinte.",
+    title: "Integri Effatta nel tuo gestionale.",
+    desc: "API REST per fatture e scontrini e un sotto-account isolato per ogni cliente. Dominio, logo ed e-mail di sistema restano i tuoi.",
+    proof: "Pricing per volume, su misura. Il tuo brand davanti, Effatta dietro.",
     icon: "code-2",
   },
   {
     tag: "Associazione di categoria",
-    title: "Una piattaforma per tutti gli iscritti.",
-    desc: "Onboarding di massa via CSV o SSO. Pricing convenzionato. Dashboard dedicata.",
-    proof: "Migliaia di partite IVA sotto un'unica gestione consortile.",
+    title: "Un benefit concreto per i tuoi iscritti.",
+    desc: "Listino convenzionato e onboarding co-brandizzato con l'ente. Lo stesso strumento per fatture e scontrini, assistenza in italiano.",
+    proof: "Più valore alla quota e una rendita ricorrente per ogni iscritto attivo.",
     icon: "users",
   },
   {
     tag: "Commercialista",
-    title: "Offri la fatturazione ai tuoi clienti.",
-    desc: "Portale del cliente con il tuo logo. Tu vedi tutto, loro emettono in autonomia.",
-    proof: "Tu fissi il prezzo. Tu sei il referente, sempre.",
+    title: "Tutti i clienti dello studio, in un pannello.",
+    desc: "Un sotto-account per ogni P.IVA, permessi per i collaboratori ed export compatibile coi gestionali contabili. Il portale parla col tuo dominio.",
+    proof: "Tu sei il referente. Tu fissi il prezzo, sempre.",
     icon: "briefcase",
   },
 ];
@@ -59,7 +59,7 @@ function PartnerSection({ density = "spacious" }) {
             fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.55,
             color: "var(--fg-2)", maxWidth: 560,
           }}>
-            Tre modi di portare la fatturazione elettronica ai tuoi clienti, sempre con il tuo brand davanti.
+            Tre modi di portare fatture e scontrini ai tuoi clienti — o ai tuoi iscritti — sempre con il tuo brand davanti.
           </p>
         </div>
 
