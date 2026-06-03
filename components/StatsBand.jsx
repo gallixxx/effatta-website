@@ -9,7 +9,7 @@ const STATS = [
 { value: 100, suffix: "M+", label: "fatture gestite sulla piattaforma", sub: "Dal 2018 a oggi" },
 { value: 10, suffix: "M+", label: "scontrini emessi con Effatta", sub: "Cassa web + API" },
 { value: 10, suffix: "K+", label: "partite IVA che ci usano ogni giorno", sub: "Tra dirette e canale" },
-{ text: "ISO 27001", label: "certificazione sicurezza delle informazioni", sub: "Audit indipendente" }];
+{ text: "27001", label: "Certificazione ISO", sub: "Sicurezza delle informazioni" }];
 
 
 function StatsBand({ density = "spacious" }) {
@@ -123,8 +123,8 @@ function StatCell({ stat, seen, index }) {
       {isText ?
       <div style={{
         fontFamily: "var(--font-sans)",
-        fontSize: 46, lineHeight: 1, letterSpacing: "-0.03em",
-        color: "#fff", fontWeight: "700"
+        fontSize: 64, lineHeight: 1, letterSpacing: "-0.035em",
+        color: "#fff", fontVariantNumeric: "tabular-nums", fontWeight: "700"
       }}>{stat.text}</div> :
 
       <div style={{

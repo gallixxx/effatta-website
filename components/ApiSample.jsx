@@ -5,7 +5,7 @@
  * valore è l'infrastruttura sotto). */
 const ENTERPRISE_SPECS = [
   { k: "Disponibilità", v: "Uptime monitorato 24/7" },
-  { k: "Sicurezza", v: "ISO 27001 · dati in UE" },
+  { k: "Sicurezza", v: "Certificazione ISO · dati in UE" },
   { k: "Scala", v: "Migliaia di documenti al giorno" },
   { k: "Integrazione", v: "REST API · webhook · SDK" },
   { k: "Conservazione", v: "10 anni a norma, inclusa" },
@@ -60,7 +60,7 @@ function ApiSample({ density = "spacious" }) {
             </p>
 
             <ul style={{ listStyle: "none", margin: "0 0 36px", padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-              {["Architettura multi-tenant: un account isolato per cliente", "Sicurezza certificata ISO 27001, dati in UE", "Conservazione a norma per 10 anni, inclusa", "Account manager dedicato e offerta sui volumi"].map((b) => (
+              {["Architettura multi-tenant: un account isolato per cliente", "Sicurezza certificata ISO, dati in UE", "Conservazione a norma per 10 anni, inclusa", "Account manager dedicato e offerta sui volumi"].map((b) => (
                 <li
                   key={b}
                   style={{
