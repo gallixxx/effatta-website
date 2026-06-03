@@ -10,21 +10,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build con Vite
+        run: npm run build
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # Pubblichiamo SOLO l'output ottimizzato di Vite. La build contiene
+          # già le pagine, gli asset hashati e le cartelle copiate verbatim dal
+          # plugin in vite.config.mjs (assets/logos, data, bot). docs/ e i
+          # sorgenti non finiscono in dist, quindi non servono più esclusi.
+          local-dir: ./dist/
           server-dir: /lodovicog5.sg-host.com/public_html/
-          # Non sovrascrivere i file gestiti a runtime sul server e non
-          # pubblicare materiali interni. Include i default git/node.
+          # Non sovrascrivere i file gestiti a runtime sul server: lo stato del
+          # servizio (aggiornato dal bot) e i segreti/stato del bot vivono lì.
           exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
-            docs/**
             data/status.json
             bot/config.php
             bot/state.json
